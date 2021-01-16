@@ -1,4 +1,4 @@
-from .models import Picture
+from selfapp.apps.pictures.models import Picture
 from rest_framework import serializers
 
 
