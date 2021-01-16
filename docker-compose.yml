@@ -1,0 +1,21 @@
+version: "3.9"
+   
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    restart: on-failure
+
+  web:
+    build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8899"
+    volumes:
+      - .:/code
+    ports:
+      - "8899:8899"
+    depends_on:
+      - db
+    restart: on-failure

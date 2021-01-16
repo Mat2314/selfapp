@@ -1,0 +1,12 @@
+Django>=3.0,<4.0
+psycopg2-binary>=2.8
+django-cors-headers
+djangorestframework
+djangorestframework_simplejwt
+celery==4.3.0
+django-environ
+gunicorn==19.9.0
+psycopg2
+uwsgi
+Pillow
+requests
