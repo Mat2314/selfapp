@@ -1,0 +1,143 @@
+.carousel-item > img {
+    height: 90vh;
+}
+
+.info-box {
+    box-shadow: 0 0 10px #ddd;
+    border-radius: 5px;
+    min-height: 30vh;
+    margin: 1em 0;
+    padding: 1em;
+    background-color: white;
+}
+
+.carousel-caption {
+    position: absolute;
+    right: 0;
+    bottom: 40px;
+    left: 0;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    text-align: center;
+    background-color: rgba(233, 233, 233, 0.632);
+    width: 100%;
+}
+
+.line-bottom {
+    border-bottom: 1px solid #ddd;
+}
+
+.line-right {
+    border-right: 1px solid #ddd;
+}
+
+.numberCircle {
+    border-radius: 50%;
+    padding: 5px 13px;
+    font-size: 20px;
+    font-weight: 400;
+
+    border: 2px solid orange;
+    color: white;
+    text-align: center;
+}
+
+.content {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1em;  
+    font-weight: 300;
+    color: white;
+}
+
+.box {
+    height: 100%;
+    font-size: 1.2em;
+}
+
+.ludwig {
+    position: relative;
+    padding-left: 1em;
+    border-left: 0.2em solid rgb(232, 232, 232);
+    font-family: 'Roboto', serif;
+    font-size: 2.4em;
+    line-height: 1.5em;
+    font-weight: 100;
+    &:before, &:after {
+        content: '\201C';
+        font-family: 'Sanchez';
+        color: white;
+     }
+     &:after {
+        content: '\201D';
+     }
+  }
+  
+.icons-container {
+    color: rgb(176, 176, 176); 
+    font-size: 1.2em;
+}
+
+.icons-container > a {
+    text-decoration: none;
+    color: rgb(176, 176, 176); 
+}
+
+.responsive-login-button {
+    display: none;
+}
+
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+    .carousel-item > img {
+        height: 50vh;
+    }
+
+    nav > form {
+        display: none;
+    }
+
+    .responsive-login-button {
+        display: block;
+    }
+
+    .box {
+        line-height: 3em;
+    }
+
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {
+    .carousel-item > img {
+        height: 50vh;
+    }
+
+    nav > form {
+        display: none;
+    }
+
+    .responsive-login-button {
+        display: block;
+    }
+    
+    .box {
+        line-height: 3em;
+    }
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+
+}
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) {
+    
+}

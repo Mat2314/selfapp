@@ -1,0 +1,74 @@
+<h3 class="text-center text-white p-3" style="background-color: orange; height: 8vh;">selfapp</h3>
+<div style="background-color: orange; height: 100vh; padding-bottom: 6vh;">
+    <div class="bg-white" style="height: 88vh;">
+        <div class="container p-5">
+            <form [formGroup]="registrationForm" class="p-3" style="box-shadow: 0 0 10px #ddd; border-radius: 5px;">
+                <h3 class="text-center"> Registration </h3>
+
+                <!-- Row -->
+                <div class="form-row">
+                    <!-- First name -->
+                    <div class="form-group col-md-6">
+                        <label>First name</label>
+                        <input formControlName="first_name" type="text" class="form-control" placeholder="First name"
+                            maxlength="150"
+                            [ngClass]="registrationForm.controls.first_name.touched || registrationForm.controls.first_name.dirty ? registrationForm.controls.first_name.valid ? 'is-valid' : 'is-invalid' : ''">
+                    </div>
+                    <!-- Last name -->
+                    <div class="form-group col-md-6">
+                        <label>Last name</label>
+                        <input formControlName="last_name" type="text" class="form-control" placeholder="Last name"
+                            maxlength="150"
+                            [ngClass]="registrationForm.controls.last_name.touched || registrationForm.controls.last_name.dirty ? registrationForm.controls.last_name.valid ? 'is-valid' : 'is-invalid' : ''">
+                    </div>
+                </div>
+
+                <!-- Row -->
+                <div class="form-row">
+                    <!-- Email -->
+                    <div class="form-group col-md-12">
+                        <label>Email</label>
+                        <input formControlName="email" type="email" class="form-control" placeholder="Email"
+                            maxlength="100"
+                            [ngClass]="registrationForm.controls.email.touched || registrationForm.controls.email.dirty ? registrationForm.controls.email.valid ? 'is-valid' : 'is-invalid' : ''">
+                    </div>
+                </div>
+
+                <!-- Row -->
+                <div class="form-row">
+                    <!-- Password -->
+                    <div class="form-group col-md-12">
+                        <label>Password</label>
+                        <input formControlName="password" type="password" class="form-control" placeholder="Password"
+                            minlength="8" maxlength="100"
+                            [ngClass]="registrationForm.controls.password.touched || registrationForm.controls.password.dirty ? registrationForm.controls.password.valid ? 'is-valid' : 'is-invalid' : ''">
+                    </div>
+                </div>
+
+                <!-- Row -->
+                <div class="form-row">
+                    <!-- Repeat password -->
+                    <div class="form-group col-md-12">
+                        <label>Repeat your password</label>
+                        <input formControlName="repeat_password" type="password" class="form-control"
+                            placeholder="Repeat password" minlength="8" maxlength="100"
+                            [ngClass]="registrationForm.controls.repeat_password.touched || registrationForm.controls.repeat_password.dirty ? registrationForm.controls.repeat_password.valid && registrationForm.controls.repeat_password.value == registrationForm.controls.password.value ? 'is-valid' : 'is-invalid' : ''">
+                    </div>
+                </div>
+
+                <!-- Submit -->
+                <div class="text-center">
+                    <button (click)="register()" type="submit" class="btn btn-primary"
+                        [disabled]="!registrationForm.valid || !(registrationForm.controls.repeat_password.value == registrationForm.controls.password.value)">Register</button>
+                </div>
+
+                <!-- Go back -->
+                <div class="text-center">
+                    <button routerLink="/" class="btn btn-link">Go back</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
