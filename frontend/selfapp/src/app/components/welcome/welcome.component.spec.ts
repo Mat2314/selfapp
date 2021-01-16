@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -13,7 +14,8 @@ describe('WelcomeComponent', () => {
       declarations: [WelcomeComponent],
       providers: [
         { provide: MatDialog, useValue: {} },
-        { provide: Router, useValue: {} }
+        { provide: Router, useValue: {} },
+        { provide: HttpClient, useValue: {} },
       ]
     })
       .compileComponents();

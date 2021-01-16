@@ -15,13 +15,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LoginDialogComponent } from './dialog/login-dialog/login-dialog.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { HttpClientModule } from "@angular/common/http";
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from "@angular/material/snack-bar";
+import { InfoComponent } from './snackbars/info/info.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     LoginDialogComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    InfoComponent
   ],
   imports: [
     BrowserModule,
@@ -35,9 +40,15 @@ import { RegistrationComponent } from './components/registration/registration.co
     MatDialogModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule,
+    MatSnackBarModule
   ],
-  providers: [],
+  providers: [
+    Location, { provide: LocationStrategy, useClass: HashLocationStrategy },
+    // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000, horizontalPosition: 'right', verticalPosition: 'top' } }
+  ],
   bootstrap: [AppComponent],
   exports: [CarouselModule, AlertModule]
 })

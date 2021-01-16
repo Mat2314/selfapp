@@ -27,4 +27,5 @@ class UserRegistrationViewSet(viewsets.ModelViewSet):
             user.save()
             return JsonResponse({"ok": "User account created", "message": "Account created successfully!"})
         else:
+            print(serializer.errors)
             return JsonResponse({"error": "could not register user", "message": "Submited data is not valid"})

@@ -3,17 +3,19 @@
     <nav class="navbar navbar-light my-2 py-2 px-3 d-flex justify-content-between"
         style="box-shadow: 0 0 10px #ddd; border-radius: 5px; background-color: orange;">
         <h3 style="font-variant: small-caps; color: white;"> selfapp </h3>
-        <button (click)="openLoginDialog()" type="submit" class="btn btn-sm btn-success responsive-login-button">Sign in</button>
+        <button (click)="openLoginDialog()" type="submit" class="btn btn-sm btn-success responsive-login-button">Sign
+            in</button>
 
-        <form class="form-inline">
+        <form [formGroup]="loginForm" class="form-inline">
             <div class="form-group">
-                <input type="text" class="form-control form-control-sm" placeholder="Email">
+                <input formControlName="username" type="text" class="form-control form-control-sm" placeholder="Email">
             </div>
             <div class="form-group mx-sm-3">
-                <input type="password" class="form-control form-control-sm" placeholder="Password">
+                <input formControlName="password" type="password" class="form-control form-control-sm"
+                    placeholder="Password">
             </div>
             <div class="form-group mx-sm-3">
-                <button type="submit" class="btn btn-sm btn-success">Enter</button>
+                <button (click)="login()" type="submit" class="btn btn-sm btn-success">Enter</button>
             </div>
         </form>
     </nav>

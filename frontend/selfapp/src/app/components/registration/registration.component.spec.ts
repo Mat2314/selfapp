@@ -1,7 +1,11 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule, MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from "@angular/router/testing";
 
 import { RegistrationComponent } from './registration.component';
 
@@ -12,7 +16,17 @@ describe('RegistrationComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [RegistrationComponent],
-      imports: [ReactiveFormsModule, BrowserAnimationsModule]
+      imports: [
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        MatSnackBarModule,
+        RouterTestingModule.withRoutes([]),
+      ],
+      providers: [
+        { provider: HttpClient, useValue: {} },
+        { provider: Router, useValue: {} }
+      ]
     })
       .compileComponents();
   }));

@@ -5,6 +5,7 @@ import { faFacebook, faInstagram, faTwitter, faLinkedin, faSnapchat } from "@for
 import { MatDialog } from '@angular/material/dialog';
 import { LoginDialogComponent } from 'src/app/dialog/login-dialog/login-dialog.component';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -20,13 +21,18 @@ export class WelcomeComponent implements OnInit {
   faLinkedin = faLinkedin;
   faSnapchat = faSnapchat;
 
+  public loginForm: FormGroup = new FormGroup({
+    username: new FormControl(null, Validators.required),
+    password: new FormControl(null, Validators.required)
+  });
+
   public contactForm: FormGroup = new FormGroup({
     name: new FormControl(null, [Validators.required]),
     email: new FormControl(null, [Validators.required, Validators.email]),
     message: new FormControl(null, [Validators.required])
   });
 
-  constructor(public dialog: MatDialog, private router: Router) { }
+  constructor(public dialog: MatDialog, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -38,6 +44,20 @@ export class WelcomeComponent implements OnInit {
 
   goToRegistration() {
     this.router.navigate(['/registration']);
+  }
+
+  login() {
+    if (this.loginForm.valid) {
+      this.authService.loginUser(this.loginForm.getRawValue()).subscribe(
+        res => {
+          console.log(res);
+        }, err => {
+          // console.log(err);
+        }, () => {
+          this.loginForm.reset();
+        }
+      );
+    }
   }
 
 }

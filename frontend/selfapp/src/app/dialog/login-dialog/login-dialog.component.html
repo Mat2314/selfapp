@@ -1,17 +1,18 @@
 <h1 mat-dialog-title class="text-center">Sign in</h1>
 <div mat-dialog-content>
-    <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput type="email">
-    </mat-form-field>
-    <br>
-    <mat-form-field appearance="fill">
-        <mat-label>Password</mat-label>
-        <input matInput type="password">
-    </mat-form-field>
-    <br>
-    <div class="text-center">
-        <button class="btn btn-sm btn-success">Submit</button>
-    </div>
-
+    <form [formGroup]="loginForm">
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input formControlName="username" matInput type="email">
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput type="password">
+        </mat-form-field>
+        <br>
+        <div class="text-center">
+            <button (click)="login()" type="submit" class="btn btn-sm btn-success">Submit</button>
+        </div>
+    </form>
 </div>
