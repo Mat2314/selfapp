@@ -51,6 +51,10 @@ export class WelcomeComponent implements OnInit {
       this.authService.loginUser(this.loginForm.getRawValue()).subscribe(
         res => {
           console.log(res);
+          if (res.access && res.refresh) {
+            this.authService.setTokens(res);
+            this.router.navigate(['/nav/dashboard']);
+          }
         }, err => {
           // console.log(err);
         }, () => {

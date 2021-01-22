@@ -1,0 +1,15 @@
+<mat-drawer-container style="height: 100%;" autosize>
+    <mat-drawer #drawer [opened]="true" class="sidenav-container p-3" mode="side">
+        <img src="../../../assets/img/no_photo.png" class="custom-circle" width="180" height="180">
+        <div class="text-center text-white my-1" style="font-size: 1.2em;"> Test test </div>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+        <button type="button" mat-button (click)="drawer.toggle()">
+            <fa-icon [icon]="faBars"></fa-icon>
+        </button>
+    </div>
+
+    <router-outlet></router-outlet>
+
+</mat-drawer-container>

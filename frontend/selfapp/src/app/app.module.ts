@@ -19,6 +19,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from "@angular/material/snack-bar";
 import { InfoComponent } from './snackbars/info/info.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +30,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     WelcomeComponent,
     LoginDialogComponent,
     RegistrationComponent,
-    InfoComponent
+    InfoComponent,
+    DashboardComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     MatFormFieldModule,
     MatInputModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSidenavModule
   ],
   providers: [
     Location, { provide: LocationStrategy, useClass: HashLocationStrategy },

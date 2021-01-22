@@ -25,7 +25,7 @@ describe('LoginDialogComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create login dialog component', () => {
     expect(component).toBeTruthy();
   });
 
