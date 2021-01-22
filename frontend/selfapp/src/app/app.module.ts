@@ -22,6 +22,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { AddPhotoComponent } from './components/add-photo/add-photo.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 @NgModule({
@@ -32,7 +35,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     RegistrationComponent,
     InfoComponent,
     DashboardComponent,
-    NavigationComponent
+    NavigationComponent,
+    AddPhotoComponent,
+    TimelineComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

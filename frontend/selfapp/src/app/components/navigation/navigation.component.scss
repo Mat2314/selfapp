@@ -1,3 +1,23 @@
 .sidenav-container {
     background-color: orange;
+    max-width: 15%;
+}
+
+.nav-menu {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.nav-menu > li {
+    line-height: 2em;
+    color: white;
+}
+
+.nav-menu > li:hover { 
+    color: rgb(245, 245, 245);
+    cursor: pointer;
+}
+
+.nav-menu > li:focus  {
+    outline: 0;
 }

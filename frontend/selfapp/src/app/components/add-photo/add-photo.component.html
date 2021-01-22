@@ -1,0 +1,22 @@
+<h1 class="text-center section-header"> Add photo </h1>
+<p class="text-center section-description">Here you can upload your photo.</p>
+
+<!-- Display image -->
+<div class="d-flex justify-content-around">
+    <img *ngIf="imageUploaded" class="img-thumbnail" id="uploaded_photo" src="" alt="photo" />
+</div>
+
+<!-- Upload image -->
+<div *ngIf="!imageUploaded" class="dropzone" appDnd (fileDropped)="onFileChange($event)">
+    <input type="file" #filesInput id="filesInput" (change)="onFileChange($event.target.files)" accept="image/*" />
+    <!-- <img src="../../../assets/img/ic-upload-file.svg" alt=""> -->
+    <h3 class="mt-3">Drag and drop a picture here</h3>
+    <h3>or</h3>
+    <label for="filesInput">Browse files</label>
+</div>
+
+<form style="width: 400px; position: relative; margin: 0 auto;" class="mt-2">
+    <!-- <input formControlName="photo" (change)="displayPhoto()" type="file" accept="image/jpeg, image/png, image/jpg"> -->
+    <textarea class="form-control" rows="2" placeholder="Caption this picture"></textarea>
+    <button type="submit" class="btn btn-outline-success w-100 mt-1">Save photo</button>
+</form>

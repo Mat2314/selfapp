@@ -4,4 +4,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .custom-circle {
     border-radius: 50%;
+    width: 100%;
+    height: auto;
+}
+
+.section-header {
+    font-family: 'Brush Script MT', cursive;
+    color: orange;
+}
+
+.section-description {
+    color: #666;
 }

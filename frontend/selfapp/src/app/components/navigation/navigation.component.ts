@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -13,8 +14,19 @@ export class NavigationComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  @ViewChild(MatDrawer, { static: true }) drawer: MatDrawer;
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    var width = event.target.innerWidth;
+    if (width < 750) {
+      this.drawer.close();
+    } else {
+      this.drawer.open();
+    }
+  }
+
+  ngOnInit(): void {
   }
 
 }
