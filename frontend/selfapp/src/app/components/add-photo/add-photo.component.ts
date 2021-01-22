@@ -14,7 +14,6 @@ export class AddPhotoComponent implements OnInit {
 
   @ViewChild('filesInput') filesInput: ElementRef;
 
-
   constructor() { }
 
   ngOnInit(): void {

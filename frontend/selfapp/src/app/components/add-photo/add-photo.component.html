@@ -3,11 +3,17 @@
 
 <!-- Display image -->
 <div class="d-flex justify-content-around">
-    <img *ngIf="imageUploaded" class="img-thumbnail" id="uploaded_photo" src="" alt="photo" />
+    <div class="image-container">
+        <img (click)="filesInput.click()" *ngIf="imageUploaded" class="img-thumbnail" id="uploaded_photo" src=""
+            alt="photo" />
+        <div (click)="filesInput.click()"  class="overlay">
+            <div class="text">Click to change photo</div>
+        </div>
+    </div>
 </div>
 
 <!-- Upload image -->
-<div *ngIf="!imageUploaded" class="dropzone" appDnd (fileDropped)="onFileChange($event)">
+<div [ngClass]="imageUploaded ? 'd-none' : ''" class="dropzone" appDnd (fileDropped)="onFileChange($event)">
     <input type="file" #filesInput id="filesInput" (change)="onFileChange($event.target.files)" accept="image/*" />
     <!-- <img src="../../../assets/img/ic-upload-file.svg" alt=""> -->
     <h3 class="mt-3">Drag and drop a picture here</h3>
