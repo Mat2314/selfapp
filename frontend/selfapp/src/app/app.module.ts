@@ -15,7 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LoginDialogComponent } from './dialog/login-dialog/login-dialog.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from "@angular/material/snack-bar";
 import { InfoComponent } from './snackbars/info/info.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
@@ -25,7 +25,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { AddPhotoComponent } from './components/add-photo/add-photo.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { SettingsComponent } from './components/settings/settings.component';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -55,11 +57,13 @@ import { SettingsComponent } from './components/settings/settings.component';
     MatInputModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     Location, { provide: LocationStrategy, useClass: HashLocationStrategy },
-    // { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000, horizontalPosition: 'right', verticalPosition: 'top' } }
   ],
   bootstrap: [AppComponent],

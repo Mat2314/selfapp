@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { registrationData } from '../interfaces/registrationData.interface';
 
@@ -13,7 +15,7 @@ export class AuthService {
   private JWT_TOKEN = 'JWT_TOKEN';
   private REFRESH_TOKEN = 'REFRESH_TOKEN';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   loginUser(formData): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/token/`, formData);
@@ -38,5 +40,23 @@ export class AuthService {
   setTokens(tokens) {
     this.setJWTToken(tokens.access);
     this.setRefreshToken(tokens.refresh);
+  }
+
+  logout() {
+    localStorage.removeItem(this.JWT_TOKEN);
+    localStorage.removeItem(this.REFRESH_TOKEN);
+    this.router.navigate(['/welcome'])
+  }
+
+  refreshToken() {
+    return this.http.post(`${this.apiUrl}/auth/refresh/`, {
+      'refresh': this.getRefreshToken()
+    }).pipe(
+      tap((tokens: any) => {
+        this.setJWTToken(tokens.access);
+      }), catchError(err => {
+        return throwError(err);
+      })
+    );
   }
 }

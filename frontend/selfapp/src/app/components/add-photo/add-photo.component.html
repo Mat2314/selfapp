@@ -6,7 +6,7 @@
     <div class="image-container">
         <img (click)="filesInput.click()" *ngIf="imageUploaded" class="img-thumbnail" id="uploaded_photo" src=""
             alt="photo" />
-        <div (click)="filesInput.click()"  class="overlay">
+        <div (click)="filesInput.click()" class="overlay">
             <div class="text">Click to change photo</div>
         </div>
     </div>
@@ -21,8 +21,18 @@
     <label for="filesInput">Browse files</label>
 </div>
 
-<form style="width: 400px; position: relative; margin: 0 auto;" class="mt-2">
-    <!-- <input formControlName="photo" (change)="displayPhoto()" type="file" accept="image/jpeg, image/png, image/jpg"> -->
-    <textarea class="form-control" rows="2" placeholder="Caption this picture"></textarea>
-    <button type="submit" class="btn btn-outline-success w-100 mt-1" [disabled]="!imageUploaded">Save photo</button>
+<form [formGroup]="imageForm" style="width: 400px; position: relative; margin: 0 auto;" class="mt-2">
+    <mat-form-field class="w-100" appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input formControlName="date" matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+        <mat-label>Caption</mat-label>
+        <textarea formControlName="caption" matInput rows="2" placeholder="Caption this picture"></textarea>
+    </mat-form-field>
+    <button (click)="uploadImage()" type="submit" class="btn btn-outline-success w-100 mt-1"
+        [disabled]="!imageUploaded">Save photo</button>
 </form>

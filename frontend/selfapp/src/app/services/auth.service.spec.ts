@@ -64,7 +64,6 @@ describe('AuthService', () => {
   });
 
   it('should log in to the account', () => {
-
     var login_data = { username: "TestUsername123", password: "TestPassword123" };
     service.loginUser(login_data).subscribe(res => {
       expect(Object.keys(res).length).toEqual(2);

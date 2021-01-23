@@ -70,6 +70,10 @@ textarea, textarea:focus {
     opacity: 1;
     cursor: pointer;
   }
+
+  .image-container:hover .text {
+    display: block;
+  }
   
   .text {
     color: #555;
@@ -81,4 +85,5 @@ textarea, textarea:focus {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center;
+    display: none;
 }

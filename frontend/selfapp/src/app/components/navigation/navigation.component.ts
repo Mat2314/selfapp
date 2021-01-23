@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -12,7 +13,7 @@ export class NavigationComponent implements OnInit {
   faBars = faBars;
   showFiller = false;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   @ViewChild(MatDrawer, { static: true }) drawer: MatDrawer;
 
@@ -27,6 +28,10 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 }

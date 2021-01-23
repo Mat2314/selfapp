@@ -20,4 +20,5 @@ from django.conf.urls import url
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^auth/', include('selfapp.apps.authentication.urls')),
+    url(r'^pictures/', include('selfapp.apps.pictures.urls'))
 ]
