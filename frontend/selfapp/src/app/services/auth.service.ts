@@ -9,7 +9,7 @@ import { registrationData } from '../interfaces/registrationData.interface';
 })
 export class AuthService {
 
-  private apiUrl = environment.apiUrl;
+  public apiUrl = environment.apiUrl;
   private JWT_TOKEN = 'JWT_TOKEN';
   private REFRESH_TOKEN = 'REFRESH_TOKEN';
 

@@ -24,5 +24,5 @@
 <form style="width: 400px; position: relative; margin: 0 auto;" class="mt-2">
     <!-- <input formControlName="photo" (change)="displayPhoto()" type="file" accept="image/jpeg, image/png, image/jpg"> -->
     <textarea class="form-control" rows="2" placeholder="Caption this picture"></textarea>
-    <button type="submit" class="btn btn-outline-success w-100 mt-1">Save photo</button>
+    <button type="submit" class="btn btn-outline-success w-100 mt-1" [disabled]="!imageUploaded">Save photo</button>
 </form>
