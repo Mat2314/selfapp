@@ -1,4 +1,4 @@
-from django.urls import include
+from django.urls import include, path
 from django.conf.urls import url
 from rest_framework_simplejwt import views as jwt_views
 from rest_framework import routers
@@ -9,4 +9,5 @@ router.register(r'upload', views.PictureViewSet)
 
 urlpatterns = [
     url('', include(router.urls)),
+    path('media/images/<str:imagename>', views.DisplayImageView.as_view(), name="display-image")
 ]

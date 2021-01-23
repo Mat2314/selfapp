@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from .serializers import PictureSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from selfapp.decorators import log_exceptions
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from rest_framework.views import APIView
 from .models import Picture
 
 
@@ -31,3 +32,17 @@ class PictureViewSet(viewsets.ModelViewSet):
         new_picture.save()
 
         return JsonResponse({"ok": "Image saved", "message": "Image was added sucessfully!"})
+
+
+class DisplayImageView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    @log_exceptions("Error - could not display the image")
+    def get(self, request, imagename):
+        """
+        Endpoint displays particular image.
+        /media/images/...
+        """
+        image_path = f'media/images/{imagename}'
+        image_data = open(image_path, "rb").read()
+        return HttpResponse(image_data, content_type="image/*")

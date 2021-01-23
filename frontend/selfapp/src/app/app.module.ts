@@ -28,6 +28,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { InterceptedSrcDirective } from './directives/intercepted-src.directive';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     NavigationComponent,
     AddPhotoComponent,
     TimelineComponent,
-    SettingsComponent
+    SettingsComponent,
+    InterceptedSrcDirective
   ],
   imports: [
     BrowserModule,
