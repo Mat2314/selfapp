@@ -3,7 +3,7 @@
 <div *ngFor="let photo of photos" class="row">
     <div class="col-sm-4"></div>
     <div class="col-sm-4">
-        <img class="img-thumbnail" [@fadeInRight] [interceptedsrc]="photo.url">
+        <img class="img-thumbnail" [@fadeInRight] [interceptedsrc]="photo.image">
     </div>
     <div class="col-sm-4 p-0">
         <div [@fadeInUp] class="caption-container my-1 p-2">
@@ -12,4 +12,8 @@
         </div>
     </div>
     <div [@slideDown] class="line"></div>
+</div>
+
+<div *ngIf="currentPage > lastPage" class="d-flex justify-content-around">
+    <div class="ending-element">Beginning of your journey</div>
 </div>

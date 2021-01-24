@@ -6,6 +6,9 @@ from selfapp.decorators import log_exceptions
 from django.http import JsonResponse, HttpResponse
 from rest_framework.views import APIView
 from .models import Picture
+from rest_framework.renderers import JSONRenderer
+from rest_framework.response import Response
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -13,6 +16,28 @@ class PictureViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = PictureSerializer
     permission_classes = (IsAuthenticated,)
+
+    @log_exceptions("Error - could not get user's pictures")
+    def list(self, request):
+        """
+        Endpoint returns paginated list of pictures with captions and the date.
+        Expected parameters:
+        - page: number
+        """
+        # Get pictures
+        page = int(self.request.query_params.get('page'))
+        pictures = list(
+            request.user.pictures.all().order_by('-date').values('id', 'image', 'caption', 'date', 'is_profile'))
+
+        # Paginate
+        paginator = Paginator(pictures, 5)
+        page_objects = paginator.page(page).object_list
+
+        data = dict()
+        data['lastPage'] = paginator.num_pages
+        data['images'] = page_objects
+        print(request.META['HTTP_HOST'])
+        return Response(data)
 
     @log_exceptions("Error - could not upload a picture")
     def create(self, request):

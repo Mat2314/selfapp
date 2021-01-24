@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -48,7 +49,7 @@ export class AddPhotoComponent implements OnInit {
   }
 
   uploadImage() {
-    var date = this.imageForm.controls.date.value;
+    var date = formatDate(this.imageForm.controls.date.value, 'yyyy-MM-dd', 'pl');
     var caption = this.imageForm.controls.caption.value;
 
     this.imageService.uploadImage(this.photo, date, caption).subscribe(

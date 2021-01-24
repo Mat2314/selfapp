@@ -34,31 +34,34 @@ import { environment } from 'src/environments/environment';
 })
 export class TimelineComponent implements OnInit {
 
-  public apiUrl = environment.apiUrl + '/pictures/media/images/Racool_9wF2TLN.png';
+  public apiUrl = environment.apiUrl;
   public photos: Array<Photo> = [];
-  public scrollFromBottom: number;
+  public currentPage: number = 1;
+  public lastPage: number = 10;
+
+  private scrollFromBottom: number;
+  private loadingResponse: boolean = false;
 
   constructor(private scrollService: ScrollService, private imageService: ImageService, private changeDetector: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
+    this.getPhotos();
+
     this.scrollService.getValue().subscribe((value) => {
       this.scrollFromBottom = value;
       if (this.scrollFromBottom < 50) {
-        // Download another picture
-        this.pushToPhotosArray();
+        // Download another pictures
+        this.getPhotos();
         this.changeDetector.detectChanges();
       }
-      // console.log("From bottom timeline:", this.scrollFromBottom);
     });
-
-    this.pushToPhotosArray();
   }
 
   pushToPhotosArray() {
     var photo: Photo = {
       id: "123",
-      url: this.apiUrl,
+      image: this.apiUrl,
       date: new Date(2021, 1, 21, 10, 10, 10, 10),
       caption: 'This is my caption'
     }
@@ -68,4 +71,33 @@ export class TimelineComponent implements OnInit {
     console.log(this.photos);
   }
 
+  getPhotos() {
+    if (this.currentPage < this.lastPage + 1 && !this.loadingResponse) {
+
+      // Prevent multiple server requests
+      this.loadingResponse = true;
+
+      // Download images data
+      this.imageService.getTimelineImages(this.currentPage).subscribe(
+        res => {
+          // console.log(res);
+          this.lastPage = res.lastPage;
+          if (res.images) {
+            // Add images to array
+            res.images.forEach((element: Photo) => {
+              element.image = this.apiUrl + "/pictures/" + element.image;
+              this.photos.push(element);
+            });
+            console.log(this.photos);
+          }
+        }, err => {
+          // console.log(err);
+        }, () => {
+          // Increment the page and let the other request be made
+          this.currentPage++;
+          this.loadingResponse = false;
+        }
+      );
+    }
+  }
 }

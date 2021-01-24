@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { AlertModule } from "ngx-bootstrap/alert";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -29,6 +29,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { InterceptedSrcDirective } from './directives/intercepted-src.directive';
+import '@angular/common/locales/global/pl'
+
 
 @NgModule({
   declarations: [
@@ -66,7 +68,8 @@ import { InterceptedSrcDirective } from './directives/intercepted-src.directive'
   providers: [
     Location, { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000, horizontalPosition: 'right', verticalPosition: 'top' } }
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 5000, horizontalPosition: 'right', verticalPosition: 'top' } },
+    { provide: LOCALE_ID, useValue: "pl" },
   ],
   bootstrap: [AppComponent],
   exports: [CarouselModule, AlertModule]
