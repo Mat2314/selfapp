@@ -3,12 +3,12 @@ import { Directive, ElementRef, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Directive({
-  selector: '[interceptedSrc]'
+  selector: '[interceptedsrc]'
 })
 export class InterceptedSrcDirective {
 
   public imageToShow: any;
-  @Input('interceptedSrc') src: string;
+  @Input('interceptedsrc') src: string;
 
   constructor(public el: ElementRef, private http: HttpClient) {
   }

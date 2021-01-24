@@ -14,12 +14,12 @@
         </ul>
     </mat-drawer>
 
-    <div class="example-sidenav-content">
+    <mat-drawer-content>
         <button type="button" mat-button (click)="drawer.toggle()">
             <fa-icon [icon]="faBars"></fa-icon>
         </button>
-    </div>
 
-    <router-outlet></router-outlet>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
 
 </mat-drawer-container>

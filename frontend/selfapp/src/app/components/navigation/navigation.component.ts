@@ -1,7 +1,8 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { MatDrawer } from '@angular/material/sidenav';
+import { MatDrawer, MatDrawerContent, MatSidenavContainer } from '@angular/material/sidenav';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
+import { ScrollService } from 'src/app/services/scroll.service';
 
 @Component({
   selector: 'app-navigation',
@@ -13,9 +14,10 @@ export class NavigationComponent implements OnInit {
   faBars = faBars;
   showFiller = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private scrollService: ScrollService) { }
 
   @ViewChild(MatDrawer, { static: true }) drawer: MatDrawer;
+  @ViewChild(MatDrawerContent, { static: true }) drawerContent: MatDrawerContent;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -28,6 +30,10 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.drawerContent.elementScrolled().subscribe(event => {
+      var fromBottom = this.drawerContent.measureScrollOffset("bottom");
+      this.scrollService.setValue(fromBottom);
+    });
   }
 
   logout() {

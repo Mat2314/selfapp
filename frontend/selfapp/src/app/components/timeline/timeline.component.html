@@ -1,3 +1,15 @@
 <h1 class="text-center section-header"> Timeline </h1>
 
-<img [interceptedSrc]="apiUrl">
+<div *ngFor="let photo of photos" class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <img class="img-thumbnail" [@fadeInRight] [interceptedsrc]="photo.url">
+    </div>
+    <div class="col-sm-4 p-0">
+        <div [@fadeInUp] class="caption-container my-1 p-2">
+            <p class="date mb-0"> {{photo.date}} </p>
+            <p class="caption mb-0"> {{photo.caption}} </p>
+        </div>
+    </div>
+    <div [@slideDown] class="line"></div>
+</div>
