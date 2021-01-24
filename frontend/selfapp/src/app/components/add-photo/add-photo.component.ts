@@ -17,15 +17,18 @@ export class AddPhotoComponent implements OnInit {
 
   public imageUploaded: boolean = false;
   public photo: File = null;
+  public todayDate: Date;
 
   public imageForm: FormGroup = new FormGroup({
-    date: new FormControl(null, [Validators.required]),
+    date: new FormControl(this.setTodayDate(), [Validators.required]),
     caption: new FormControl("", [])
   });
 
   @ViewChild('filesInput') filesInput: ElementRef;
 
-  constructor(private imageService: ImageService, private _snackBar: MatSnackBar, private router: Router) { }
+  constructor(private imageService: ImageService, private _snackBar: MatSnackBar, private router: Router) {
+    this.setTodayDate();
+  }
 
   ngOnInit(): void {
   }
@@ -74,6 +77,16 @@ export class AddPhotoComponent implements OnInit {
     this.imageForm.reset();
     this.photo = null;
     this.imageUploaded = false;
+  }
+
+  setTodayDate() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth(); //January is 0!
+    var yyyy = today.getFullYear();
+
+    this.todayDate = new Date(yyyy, mm, dd);
+    return this.todayDate;
   }
 
 }

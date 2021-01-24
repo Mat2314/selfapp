@@ -38,9 +38,8 @@ export class TimelineComponent implements OnInit {
   public photos: Array<Photo> = [];
   public currentPage: number = 1;
   public lastPage: number = 10;
-
-  private scrollFromBottom: number;
-  private loadingResponse: boolean = false;
+  public loadingResponse: boolean = false;
+  public scrollFromBottom: number;
 
   constructor(private scrollService: ScrollService, private imageService: ImageService, private changeDetector: ChangeDetectorRef) {
   }
@@ -56,19 +55,6 @@ export class TimelineComponent implements OnInit {
         this.changeDetector.detectChanges();
       }
     });
-  }
-
-  pushToPhotosArray() {
-    var photo: Photo = {
-      id: "123",
-      image: this.apiUrl,
-      date: new Date(2021, 1, 21, 10, 10, 10, 10),
-      caption: 'This is my caption'
-    }
-
-    this.photos.push(photo);
-
-    console.log(this.photos);
   }
 
   getPhotos() {
