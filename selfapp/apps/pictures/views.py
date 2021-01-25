@@ -96,7 +96,7 @@ class DashboardViewSet(viewsets.ModelViewSet):
         pictures = user.pictures.filter(is_profile=False).order_by('-date')
 
         if not pictures:
-            return JsonResponse({"no_pictures": True})
+            return JsonResponse({"no_pictures": True, "picture": ""})
 
         pictures = list(pictures.values('id', 'image', ))
         data = dict()

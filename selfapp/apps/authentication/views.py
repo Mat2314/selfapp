@@ -62,8 +62,6 @@ class UserDataViewSet(viewsets.ModelViewSet):
         :param request:
         :return:
         """
-        print(request.data)
-        print(request.FILES)
         picture = request.FILES['picture']
         user = request.user
         try:
