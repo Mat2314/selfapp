@@ -80,6 +80,31 @@ class PictureViewSet(viewsets.ModelViewSet):
         return JsonResponse({"ok": "Picture deleted", "message": "Picture deleted successfully"})
 
 
+class DashboardViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = PictureSerializer
+    permission_classes = (IsAuthenticated,)
+
+    @log_exceptions("Error - could not get dashboard data")
+    def list(self, request):
+        """
+        Endpoint returns dashboard data - in this case recently uploaded picture.
+        :param request:
+        :return:
+        """
+        user = request.user
+        pictures = user.pictures.filter(is_profile=False).order_by('-date')
+
+        if not pictures:
+            return JsonResponse({"no_pictures": True})
+
+        pictures = list(pictures.values('id', 'image', ))
+        data = dict()
+        data['no_pictures'] = False
+        data['picture'] = pictures[0]
+        return JsonResponse(data)
+
+
 class DisplayImageView(APIView):
     permission_classes = (IsAuthenticated,)
 

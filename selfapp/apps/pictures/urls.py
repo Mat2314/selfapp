@@ -6,6 +6,7 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'upload', views.PictureViewSet)
+router.register(r'dashboard', views.DashboardViewSet)
 
 urlpatterns = [
     url('', include(router.urls)),

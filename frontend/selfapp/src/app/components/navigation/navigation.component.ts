@@ -49,9 +49,11 @@ export class NavigationComponent implements OnInit {
   getUserData() {
     this.authService.getUserData().subscribe(
       res => {
-        // console.log(res);
+        console.log(res);
         this.username = res.name;
-        this.profilePictureURL = environment.apiUrl + "/pictures" + res.profile_image;
+        if (res.profile_image) {
+          this.profilePictureURL = environment.apiUrl + "/pictures" + res.profile_image;
+        }
       }, err => {
         console.log(err);
       }

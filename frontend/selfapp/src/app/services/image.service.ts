@@ -37,4 +37,8 @@ export class ImageService {
     return this.http.delete(`${this.apiUrl}/pictures/upload/`, { params: httpParams });
   }
 
+  getDashboardData(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/pictures/dashboard/`);
+  }
+
 }
