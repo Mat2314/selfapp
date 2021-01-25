@@ -29,7 +29,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { InterceptedSrcDirective } from './directives/intercepted-src.directive';
-import '@angular/common/locales/global/pl'
+import '@angular/common/locales/global/pl';
+import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.component'
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import '@angular/common/locales/global/pl'
     AddPhotoComponent,
     TimelineComponent,
     SettingsComponent,
-    InterceptedSrcDirective
+    InterceptedSrcDirective,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,

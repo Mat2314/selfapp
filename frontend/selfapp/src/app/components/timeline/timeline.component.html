@@ -9,6 +9,10 @@
         <div [@fadeInUp] class="caption-container my-1 p-2">
             <p class="date mb-0"> {{photo.date}} </p>
             <p class="caption mb-0"> {{photo.caption}} </p>
+            <button (click)="deletePictureDialog(photo.id)" class="btn btn-link text-danger custom-delete-button">
+                Remove picture
+                <fa-icon [icon]="faTimes"></fa-icon>
+            </button>
         </div>
     </div>
     <div [@slideDown] class="line"></div>

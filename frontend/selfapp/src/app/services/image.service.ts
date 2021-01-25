@@ -26,4 +26,15 @@ export class ImageService {
     return this.http.get(`${this.apiUrl}/pictures/upload/`, { params: httpParams });
   }
 
+  uploadProfilePicture(image: File): Observable<any> {
+    let formData = new FormData();
+    formData.append('picture', image);
+    return this.http.post(`${this.apiUrl}/auth/user/`, formData);
+  }
+
+  deletePicture(picture_id: string): Observable<any> {
+    let httpParams = new HttpParams().set('picture_id', picture_id);
+    return this.http.delete(`${this.apiUrl}/pictures/upload/`, { params: httpParams });
+  }
+
 }

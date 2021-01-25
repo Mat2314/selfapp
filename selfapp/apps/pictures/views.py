@@ -27,7 +27,8 @@ class PictureViewSet(viewsets.ModelViewSet):
         # Get pictures
         page = int(self.request.query_params.get('page'))
         pictures = list(
-            request.user.pictures.all().order_by('-date').values('id', 'image', 'caption', 'date', 'is_profile'))
+            request.user.pictures.filter(is_profile=False).order_by('-date').values('id', 'image', 'caption', 'date',
+                                                                                    'is_profile'))
 
         # Paginate
         paginator = Paginator(pictures, 5)
@@ -36,7 +37,6 @@ class PictureViewSet(viewsets.ModelViewSet):
         data = dict()
         data['lastPage'] = paginator.num_pages
         data['images'] = page_objects
-        print(request.META['HTTP_HOST'])
         return Response(data)
 
     @log_exceptions("Error - could not upload a picture")
@@ -57,6 +57,27 @@ class PictureViewSet(viewsets.ModelViewSet):
         new_picture.save()
 
         return JsonResponse({"ok": "Image saved", "message": "Image was added sucessfully!"})
+
+    @log_exceptions("Error - could not delete picture")
+    def delete(self, request):
+        """
+        Endpoint removes a picture with given id.
+        Expected params:
+        - picture_id: id
+        :param request:
+        :return:
+        """
+        user = request.user
+        picture_id = self.request.query_params.get('picture_id')
+        picture = Picture.objects.get(id=picture_id)
+
+        if picture not in user.pictures.all():
+            # If the picture does not belong to authenticated user
+            return JsonResponse({"error": "Action not allowed - potential security violation detected",
+                                 "message": "Potential security violation detected"})
+
+        picture.delete()
+        return JsonResponse({"ok": "Picture deleted", "message": "Picture deleted successfully"})
 
 
 class DisplayImageView(APIView):

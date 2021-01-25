@@ -1,9 +1,15 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DeleteDialogComponent } from 'src/app/dialog/delete-dialog/delete-dialog.component';
 import { Photo } from 'src/app/interfaces/displayed-photo.interface';
 import { ImageService } from 'src/app/services/image.service';
 import { ScrollService } from 'src/app/services/scroll.service';
+import { InfoComponent } from 'src/app/snackbars/info/info.component';
 import { environment } from 'src/environments/environment';
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+
 
 @Component({
   selector: 'app-timeline',
@@ -33,6 +39,7 @@ import { environment } from 'src/environments/environment';
   ]
 })
 export class TimelineComponent implements OnInit {
+  faTimes = faTimes;
 
   public apiUrl = environment.apiUrl;
   public photos: Array<Photo> = [];
@@ -41,7 +48,7 @@ export class TimelineComponent implements OnInit {
   public loadingResponse: boolean = false;
   public scrollFromBottom: number;
 
-  constructor(private scrollService: ScrollService, private imageService: ImageService, private changeDetector: ChangeDetectorRef) {
+  constructor(private scrollService: ScrollService, private imageService: ImageService, private changeDetector: ChangeDetectorRef, private dialog: MatDialog, private _snackbar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -85,5 +92,33 @@ export class TimelineComponent implements OnInit {
         }
       );
     }
+  }
+
+  deletePictureDialog(id) {
+    this.dialog.open(DeleteDialogComponent, {
+      data: {
+        picture_id: id
+      }
+    }).afterClosed().subscribe(
+      res => {
+        console.log(res);
+        if (res.deleted) {
+          this._snackbar.openFromComponent(InfoComponent, {
+            data: {
+              content: res.message
+            }
+          });
+          // Remove photo from the array
+          let index: number;
+          this.photos.forEach(element => {
+            if (element.id == id) {
+              index = this.photos.indexOf(element);
+            }
+          });
+
+          this.photos.splice(index, 1);
+        }
+      }
+    );
   }
 }

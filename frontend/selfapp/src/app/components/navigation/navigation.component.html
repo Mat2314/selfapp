@@ -1,8 +1,14 @@
 <mat-drawer-container style="height: 100%;" autosize>
     <mat-drawer #drawer [opened]="true" class="sidenav-container p-3" mode="side">
         <h3 class="text-center text-white" style="font-variant: small-caps;">selfapp</h3>
-        <img src="../../../assets/img/no_photo.png" class="custom-circle">
-        <div class="text-center text-white mt-3" style="font-size: 1.2em;"> Test test </div>
+        <div class="image-container">
+            <img *ngIf="profilePictureURL" [interceptedsrc]="profilePictureURL" class="custom-circle">
+            <img *ngIf="!profilePictureURL" src="../../../assets/img/no_photo.png" class="custom-circle">
+            <div (click)="profilePictureInput.click()" class="overlay">
+                <div class="text">Click to change photo</div>
+            </div>
+        </div>
+        <div class="text-center text-white mt-3" style="font-size: 1.2em;"> {{username}} </div>
         <hr class="bg-white" />
 
         <ul class="nav-menu mt-3">
@@ -12,6 +18,8 @@
             <li class="text-center" routerLink="/nav/settings">Settings</li>
             <li (click)="logout()" class="text-center">Logout</li>
         </ul>
+
+        <input type="file" #profilePictureInput class="d-none" id="profilePictureInput" (change)="onFileChange($event.target.files)" accept="image/*" />
     </mat-drawer>
 
     <mat-drawer-content>

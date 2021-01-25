@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Directive, ElementRef, Input } from '@angular/core';
+import { ChangeDetectorRef, Directive, ElementRef, Input, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Directive({
@@ -15,6 +15,10 @@ export class InterceptedSrcDirective {
 
   ngOnInit() {
     this.getAndDisplayImage();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.ngOnInit();
   }
 
   getImageFromUrl(): Observable<Blob> {
