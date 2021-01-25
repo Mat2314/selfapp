@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Deleting Account</h1>
+<div mat-dialog-content>
+    <p>Are you sure you want to delete your account from Selfapp? All your data saved in the service will be removed
+        permanently.</p>
+</div>
+<div mat-dialog-actions class="d-flex justify-content-around">
+    <button (click)="close()" mat-raised-button color="primary">No, I want to stay</button>
+    <button (click)="deleteAccount()" mat-raised-button color="warn">Yeah, it's time to say goodbye</button>
+</div>

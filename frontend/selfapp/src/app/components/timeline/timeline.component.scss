@@ -19,11 +19,12 @@ img {
 .caption-container {
     border: solid 3px orange;
     border-radius: 10px;
-    // float: left;
+    height: max-content;
     box-shadow: 0 0 10px #888;
     width: 400px;
     max-height: 400px;
     overflow-y: scroll;
+    position: relative;
 }
 
 .date {

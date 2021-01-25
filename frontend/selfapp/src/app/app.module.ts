@@ -31,7 +31,8 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { InterceptedSrcDirective } from './directives/intercepted-src.directive';
 import '@angular/common/locales/global/pl';
 import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.component'
-
+import { MatTabsModule } from "@angular/material/tabs";
+import { DeleteAccountDialogComponent } from './dialog/delete-account-dialog/delete-account-dialog.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.comp
     TimelineComponent,
     SettingsComponent,
     InterceptedSrcDirective,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    DeleteAccountDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.comp
     MatSnackBarModule,
     MatSidenavModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTabsModule
   ],
   providers: [
     Location, { provide: LocationStrategy, useClass: HashLocationStrategy },

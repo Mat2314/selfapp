@@ -3,8 +3,8 @@
 <h3 *ngIf="!no_pictures" class="text-center mt-3" style="color: rgb(63, 41, 0)">Recently added photo</h3>
 
 <div class="row">
-    <div class="col-4"></div>
-    <div class="col-4">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4 d-flex justify-content-around">
         <div class="text-center" *ngIf="no_pictures">
             Add your pictures in <a routerLink="/nav/add-photo">add photo</a> section.
         </div>
@@ -12,5 +12,5 @@
             <img [interceptedsrc]="photoURL" class="img-thumbnail">
         </div>
     </div>
-    <div class="col-4"></div>
+    <div class="col-sm-4"></div>
 </div>

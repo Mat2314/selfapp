@@ -60,8 +60,15 @@ export class AuthService {
     );
   }
 
-
   getUserData(): Observable<any> {
     return this.http.get(`${this.apiUrl}/auth/user/`);
+  }
+
+  changePassword(formData): Observable<any> {
+    return this.http.put(`${this.apiUrl}/auth/user/`, formData);
+  }
+
+  deleteAccount(): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/auth/user/`);
   }
 }

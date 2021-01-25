@@ -75,3 +75,35 @@ class UserDataViewSet(viewsets.ModelViewSet):
             new_picture = Picture(image=picture, is_profile=True, user=user)
             new_picture.save()
         return JsonResponse({"ok": "Picture saved", "message": "Profile picture changed"})
+
+    @log_exceptions("Error - could not change password")
+    def put(self, request):
+        """
+        Endpoint handles password change.
+        Expected params:
+        - old_password
+        - new_password
+        - new_password_repeat
+        :param request:
+        :return:
+        """
+        user = request.user
+        if user.check_password(request.data['old_password']):
+            if request.data['new_password_repeat'] == request.data['new_password']:
+                user.set_password(request.data['new_password'])
+                return JsonResponse({"ok": "password changed", "message": "Password changed successfully"})
+            else:
+                return JsonResponse({"error": "passwords do not match", "message": "Inserted passwords do not match"})
+        else:
+            return JsonResponse({"error": "Current password invalid", "message": "Old password is incorrect"})
+
+    @log_exceptions("Error - could not delete user account")
+    def delete(self, request):
+        """
+        Endpoint handles user account removal.
+        :param request:
+        :return:
+        """
+        user = request.user
+        user.delete()
+        return JsonResponse({"ok": "Account removed :(((", "message": "Account removed successfully"})
