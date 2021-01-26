@@ -98,7 +98,7 @@ class DashboardViewSet(viewsets.ModelViewSet):
         if not pictures:
             return JsonResponse({"no_pictures": True, "picture": ""})
 
-        pictures = list(pictures.values('id', 'image', ))
+        pictures = list(pictures.values('id', 'image'))
         data = dict()
         data['no_pictures'] = False
         data['picture'] = pictures[0]

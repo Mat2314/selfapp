@@ -8,7 +8,10 @@ and treat this data as sort of personal album filled with memories.
 
 ## Running the application
 Application by default is set to a production mode. 
-To start the app run the command `docker-compose up` and go to `http://127.0.0.1:8899/selfapp/` in your browser. 
+To start the app run the command `docker-compose up` and go to `http://127.0.0.1:8899/selfapp/` in your browser.
+
+### Environments
+To switch between production environment and development environment go to environments and run `prodmode.sh` for the production envrionment or `devmode.sh` for the development environment. 
 
 ## Endpoints
 The application runs on `http://127.0.0.1:8899` by default.
