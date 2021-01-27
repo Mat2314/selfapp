@@ -19,3 +19,29 @@ services:
     depends_on:
       - db
     restart: on-failure
+
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    hostname: rabbitmq
+    restart: on-failure
+
+  celeryworker:
+    build: .
+    command: celery -A selfapp worker -l info
+    volumes:
+      - .:/code
+    environment:
+      - CELERY_BROKER=amqp://guest@rabbitmq:5672
+    restart: on-failure
+    depends_on:
+      - rabbitmq
+    
+  celerybeat:
+    build: .
+    command: celery -A selfapp beat -l info
+    volumes:
+      - .:/code
+    environment:
+      - CELERY_BROKER=amqp://guest@rabbitmq:5672
+    restart: on-failure
+
