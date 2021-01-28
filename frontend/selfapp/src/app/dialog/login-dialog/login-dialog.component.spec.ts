@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogRef } from '@angular/material/dialog';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { LoginDialogComponent } from './login-dialog.component';
 
@@ -10,10 +12,10 @@ describe('LoginDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientModule, RouterTestingModule],
       declarations: [LoginDialogComponent],
       providers: [
         { provide: MatDialogRef, useValue: {} },
-        { provide: HttpClient, useValue: {} },
       ]
     })
       .compileComponents();

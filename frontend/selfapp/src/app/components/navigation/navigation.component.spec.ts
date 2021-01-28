@@ -1,4 +1,8 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDrawerContent, MatSidenavModule } from '@angular/material/sidenav';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { NavigationComponent } from './navigation.component';
 
@@ -8,9 +12,10 @@ describe('NavigationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavigationComponent ]
+      imports: [RouterTestingModule, MatSidenavModule, BrowserAnimationsModule, HttpClientModule],
+      declarations: [NavigationComponent, MatDrawerContent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

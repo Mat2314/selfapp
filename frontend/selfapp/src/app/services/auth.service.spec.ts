@@ -4,6 +4,8 @@ import { registrationData } from '../interfaces/registrationData.interface';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AuthService', () => {
   let injector: TestBed;
@@ -12,7 +14,7 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [AuthService]
     });
     injector = getTestBed();

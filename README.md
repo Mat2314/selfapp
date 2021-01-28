@@ -10,6 +10,12 @@ and treat this data as sort of personal album filled with memories.
 Application by default is set to a production mode. 
 To start the app run the command `docker-compose up` and go to `http://127.0.0.1:8899/selfapp/` in your browser.
 
+### Users initialization
+To add some users into the database you can simply register a new account (no email confirmation is required at this point) 
+or you can use django command manager to create 3 new accounts with data located in `media/csv_files/users.csv`.
+
+To add user accounts run command `python manage.py loadusers media/csv_files/users.csv`
+
 ### Environments
 To switch between production environment and development environment go to environments and run `prodmode.sh` for the production envrionment or `devmode.sh` for the development environment. 
 
