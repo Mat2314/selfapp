@@ -17,7 +17,14 @@ or you can use django command manager to create 3 new accounts with data located
 To add user accounts run command `python manage.py loadusers media/csv_files/users.csv`
 
 ### Environments
-To switch between production environment and development environment go to environments and run `prodmode.sh` for the production envrionment or `devmode.sh` for the development environment. 
+To switch between production environment and development environment go to environments and run `prodmode.sh` for the production envrionment or `devmode.sh` for the development environment.
+
+#### Backend
+While changing the environment remember to update `selfapp/settings/__init__.py` file with:
+
+Production mode | Development mode |
+----------------|------------------|
+`from .production import *` | `from .dev import *`
 
 ## Endpoints
 The application runs on `http://127.0.0.1:8899` by default.
