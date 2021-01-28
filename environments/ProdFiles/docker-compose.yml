@@ -2,19 +2,23 @@ version: "3.9"
    
 services:
   db:
-    image: postgres
+    image: postgres:12
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    volumes:
+        - ./volumes/postgres/:/var/lib/postgresql/data
     restart: on-failure
 
   web:
     build: .
+    command: bash -c "python manage.py makemigrations; python manage.py migrate; python manage.py collectstatic --noinput ; gunicorn selfapp.wsgi:application --bind 0.0.0.0:8899"
     volumes:
       - .:/code
-    ports:
-      - "8899:8899"
+      - ./volumes/static:/code/static
+    expose:
+      - 8899 
     depends_on:
       - db
     restart: on-failure
@@ -27,6 +31,8 @@ services:
   celeryworker:
     build: .
     command: celery -A selfapp worker -l info
+    volumes:
+      - .:/code
     environment:
       - CELERY_BROKER=amqp://guest@rabbitmq:5672
     restart: on-failure
@@ -36,7 +42,20 @@ services:
   celerybeat:
     build: .
     command: celery -A selfapp beat -l info
+    volumes:
+      - .:/code
     environment:
       - CELERY_BROKER=amqp://guest@rabbitmq:5672
     restart: on-failure
 
+  nginx:
+    build: ./frontend
+    volumes:
+      - ./volumes/static:/www/static
+      - ./frontend/selfapp/dist/selfapp:/www/selfapp
+      - ./frontend/selfapp/dist/selfapp/assets:/assets
+    ports:
+      - 8899:80
+    depends_on:
+      - web
+     

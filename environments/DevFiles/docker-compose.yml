@@ -7,6 +7,8 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    volumes:
+        - ./volumes/postgres/:/var/lib/postgresql/data
     restart: on-failure
 
   web:
@@ -27,7 +29,7 @@ services:
 
   celeryworker:
     build: .
-    command: celery -A selfapp worker -l info
+    command: celery -A selfapp worker -l info 
     volumes:
       - .:/code
     environment:
@@ -38,7 +40,7 @@ services:
     
   celerybeat:
     build: .
-    command: celery -A selfapp beat -l info
+    command: celery -A selfapp beat -l info 
     volumes:
       - .:/code
     environment:
